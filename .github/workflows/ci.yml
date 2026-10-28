@@ -1,0 +1,21 @@
+
+name: CloudOps360 CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Display project files
+        run: ls -la
+
+      - name: Verify website file
+        run: test -f index.html && echo "CloudOps360 website file exists!"
