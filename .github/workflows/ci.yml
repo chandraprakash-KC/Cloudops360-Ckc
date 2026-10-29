@@ -1,4 +1,4 @@
-name: CloudOps360 Advanced CI
+name: CloudOps360 CI & Artifacts
 
 on:
   push:
@@ -18,18 +18,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Set up Node.js for caching test
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+      # 2. Verify static website file exists
+      - name: Verify website file
+        run: test -f index.html && echo "CloudOps360 index.html verified successfully!"
 
-      # 3. Install & Test
-      - name: Install dependencies
-        run: npm ci || echo "No package.json found, skipping npm ci"
-
-      # 4. Save website file as an Artifact
+      # 3. Save website file as a Cloud Artifact
       - name: Upload Website Artifact
         uses: actions/upload-artifact@v4
         with:
